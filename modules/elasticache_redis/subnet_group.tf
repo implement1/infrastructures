@@ -1,8 +1,8 @@
-resource "aws_db_subnet_group" "default" {
+resource "aws_elasticache_subnet_group" "default" {
   name        = local.name_prefix
-  description = "${var.environment} aurora cluster subnet group"
+  description = "subnet group for ${var.environment} redis"
 
-  subnet_ids = var.vpc_db_subnets
+  subnet_ids = var.vpc_db_subnet_ids
 
   tags = {
     Application = var.application

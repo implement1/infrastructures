@@ -1,4 +1,5 @@
 resource "random_password" "password" {
+  count  = var.redis_enable_encrypted_transit ? 1 : 0
   length = 32
 
   lower     = true
@@ -12,14 +13,16 @@ resource "random_password" "password" {
 
   special          = true
   min_special      = 3
-  override_special = "~!#%^&*()_-+={}[]<>,.;?"
+  override_special = "!^-'"
 }
 
 resource "aws_secretsmanager_secret" "default" {
-  name        = local.name_prefix
-  description = "password for aurora cluster"
+  count = var.redis_enable_encrypted_transit ? 1 : 0
 
-  kms_key_id = aws_kms_alias.aurora_default.target_key_id
+  name        = local.name_prefix
+  description = "password for elasticache redis"
+
+  kms_key_id = var.default_kms_key_arn
 
   tags = {
     Application = var.application
@@ -33,11 +36,12 @@ resource "aws_secretsmanager_secret" "default" {
 }
 
 resource "aws_secretsmanager_secret_version" "default" {
-  secret_id = aws_secretsmanager_secret.default.id
+  count = var.redis_enable_encrypted_transit ? 1 : 0
+
+  secret_id = aws_secretsmanager_secret.default[0].id
   secret_string = jsonencode(
     {
-      username = var.aurora_admin_username,
-      password = random_password.password.result,
+      password = random_password.password[0].result,
     }
   )
 
