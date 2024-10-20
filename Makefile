@@ -1,17 +1,17 @@
 export
-TF_WORKSPACE_KEY_PREFIX=confirmhr-infrastructure
+TF_WORKSPACE_KEY_PREFIX=infras-infrastructure
 
 us-west-2-uat:
 	$(eval export AWS_REGION=us-west-2)
 	$(eval export AWS_DYNAMODB_TABLE=terraform-backend.lock)
-	$(eval export AWS_S3_BUCKET=confirmhr-uat-terraform-backend-us-west-2)
+	$(eval export AWS_S3_BUCKET=infras-uat-terraform-backend-us-west-2)
 	$(eval export ENV_NAME=uat)
 	@true
 
 us-west-2-prod:
 	$(eval export AWS_REGION=us-west-2)
 	$(eval export AWS_DYNAMODB_TABLE=terraform-backend.lock)
-	$(eval export AWS_S3_BUCKET=confirmhr-prod-terraform-backend-us-west-2)
+	$(eval export AWS_S3_BUCKET=infras-prod-terraform-backend-us-west-2)
 	$(eval export ENV_NAME=prod)
 	@true
 
