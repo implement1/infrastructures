@@ -8,7 +8,7 @@ variable "aws_region" {
 variable "application" {
   type        = string
   description = "used for naming resources and tagging"
-  default     = "confirmhr"
+  default     = "infras"
 }
 
 variable "component" {
@@ -25,7 +25,7 @@ variable "environment" {
 variable "owner" {
   type        = string
   description = "used for tagging reources"
-  default     = "confirmhr"
+  default     = "infras"
 }
 
 # acm
