@@ -115,7 +115,7 @@ variable "aurora_backup_retention_period" {
 variable "backup_account_id" {
   type        = number
   description = "the account number of the backup account"
-  default     = 823385208804
+  default     = XXXXXXXXXXXXXXX
 }
 
 # cloudwatch
